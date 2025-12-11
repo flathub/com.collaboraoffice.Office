@@ -950,7 +950,9 @@
         {
           "type": "patch",
           "paths": [
-            "patches/office-build.patch"
+              "patches/0000-CODA-Q-flatpak-update-version-to-the-real-one.patch",
+              "patches/0001-CODA-Q-flatpak-Improve-the-appstream-file.patch",
+              "patches/0002-Unify-store-description.patch"
           ]
         }
       ]
