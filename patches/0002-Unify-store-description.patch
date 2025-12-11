@@ -1,0 +1,33 @@
+From dae1ba6c05f1a1d33b98822352e12aca04dece01 Mon Sep 17 00:00:00 2001
+From: Andras Timar <andras.timar@collabora.com>
+Date: Thu, 11 Dec 2025 23:50:43 +0100
+Subject: [PATCH 2/2] Unify store description
+
+(modified)
+
+Signed-off-by: Andras Timar <andras.timar@collabora.com>
+Change-Id: I3f9e05aabaeb1c394cb87b6a95d00db55f58e96d
+---
+ qt/com.collaboraoffice.Office.metainfo.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/qt/com.collaboraoffice.Office.metainfo.xml b/qt/com.collaboraoffice.Office.metainfo.xml
+index 2c2356e8c0..0c866ea8dc 100644
+--- a/qt/com.collaboraoffice.Office.metainfo.xml
++++ b/qt/com.collaboraoffice.Office.metainfo.xml
+@@ -6,10 +6,10 @@
+  <id>com.collaboraoffice.Office</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MPL-2.0</project_license>
+- <name>Collabora Office Desktop</name>
++ <name>Collabora Office</name>
+  <summary>The Collabora Office productivity suite</summary>
+  <description>
+-  <p>Collabora Office Desktop brings the familiar Collabora Online experience to your computer - so you can create, edit, and present with a beautiful, modern UI. Built on trusted LibreOffice technology and backed by the largest team of LibreOffice developers worldwide, it delivers excellent interoperability with ODF and Microsoft Office formats (DOCX/XLSX/PPTX), and exports to PDF with ease. Your documents stay on your device unless you choose to share them - privacy by design.</p>
++  <p>Collabora Office brings the familiar Collabora Online experience to your computer - so you can create, edit, and present with a beautiful, modern UI. Built on LibreOffice, it delivers excellent interoperability with ODF and Microsoft Office formats (DOCX/XLSX/PPTX), and exports to PDF with ease. Your documents stay on your device unless you choose to share them - privacy by design.</p>
+  </description>
+  <launchable type="desktop-id">com.collaboraoffice.Office.desktop</launchable>
+  <url type="homepage">https://collaboraoffice.com</url>
+-- 
+2.51.0
+
