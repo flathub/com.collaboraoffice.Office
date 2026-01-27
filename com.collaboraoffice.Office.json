@@ -18,7 +18,7 @@
     "--socket=pulseaudio",
     "--socket=cups",
     "--filesystem=xdg-run/gvfsd",
-    "--env=COOL_TOPSRCDIR=/app/share/coolwsd",
+    "--filesystem=xdg-documents",
     "--env=LIBO_FLATPAK=1",
     "--talk-name=org.gtk.vfs.*",
     "--device=dri"
@@ -39,8 +39,8 @@
         {
           "type": "git",
           "url": "https://gerrit.libreoffice.org/core",
-          "tag": "coda-25.04.7.3-2",
-          "commit": "fcf270908a0eafb2f5c30a3b8d8bd63541eac81f"
+          "tag": "coda-25.04.8.1-1",
+          "commit": "263481a9e696b7996f42e23ff12034c7b7ed73a3"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/cairo-1.17.6.tar.xz",
@@ -788,7 +788,8 @@
         "--without-system-sane",
         "--without-system-xmlsec",
         "--without-system-zxcvbn",
-        "--without-system-zxing"
+        "--without-system-zxing",
+        "--without-templates"
       ],
       "install-rule": "distro-pack-install",
       "post-install": [
@@ -881,7 +882,8 @@
         {
           "type": "git",
           "url": "https://git.libreoffice.org/cppunit",
-          "tag": "cppunit-1.15.1"
+          "tag": "cppunit-1.15.1",
+          "commit": "7e1c90fa717eb2253ca1901d4065f06b2469cfa2"
         }
       ],
       "cleanup": [ "*" ]
@@ -938,22 +940,14 @@
         {
           "type": "git",
           "url": "https://github.com/CollaboraOnline/online.git",
-          "tag": "coda-25.04.7.3-2",
-          "commit": "d5d3ba5902d9f81f32fd422ec5dc87fd4932cb6b"
+          "tag": "coda-25.04.8.1-1",
+          "commit": "57401feb64ce0a651f309d6838c70b804849f6c0"
         },
         {
           "type": "archive",
           "url": "https://github.com/CollaboraOnline/online/releases/download/for-code-assets/node_modules-25.04.7.tar.xz",
           "sha256": "2ffa320633ef95679b22b3815ee628e61acaf00e68ae84245e2e0ab83b49c17b",
           "dest": "browser/node_modules"
-        },
-        {
-          "type": "patch",
-          "paths": [
-              "patches/0000-CODA-Q-flatpak-update-version-to-the-real-one.patch",
-              "patches/0001-CODA-Q-flatpak-Improve-the-appstream-file.patch",
-              "patches/0002-Unify-store-description.patch"
-          ]
         }
       ]
     },
