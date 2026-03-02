@@ -39,8 +39,8 @@
         {
           "type": "git",
           "url": "https://gerrit.libreoffice.org/core",
-          "tag": "coda-25.04.8.1-1",
-          "commit": "263481a9e696b7996f42e23ff12034c7b7ed73a3"
+          "tag": "coda-25.04.9.2-2",
+          "commit": "e3742eddf280d42763de19c0fc29178a4d24c7e7"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/cairo-1.17.6.tar.xz",
@@ -232,11 +232,11 @@
           "dest-filename": "libe-book-0.1.3.tar.xz"
         },
         {
-          "url": "https://dev-www.libreoffice.org/src/libetonyek-0.1.12.tar.xz",
-          "sha256": "b9fa82fbeb8cb7a701101060e4f3e1e4ef7c38f574b2859d3ecbe43604c21f83",
+          "url": "https://dev-www.libreoffice.org/src/libetonyek-0.1.13.tar.xz",
+          "sha256": "032b71cb597edd92a0b270b916188281bc35be55296b263f6817b29adbcb1709",
           "type": "file",
           "dest": "external/tarballs",
-          "dest-filename": "libetonyek-0.1.12.tar.xz"
+          "dest-filename": "libetonyek-0.1.13.tar.xz"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/libexttextcat-3.4.7.tar.xz",
@@ -461,13 +461,6 @@
           "type": "file",
           "dest": "external/tarballs",
           "dest-filename": "liborcus-0.19.2.tar.xz"
-        },
-        {
-          "url": "https://dev-www.libreoffice.org/src/postgresql-14.19.tar.bz2",
-          "sha256": "727e9e334bc1a31940df808259f69fe47a59f6d42174b22ae62d67fe7a01ad80",
-          "type": "file",
-          "dest": "external/tarballs",
-          "dest-filename": "postgresql-14.19.tar.bz2"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/raptor2-2.0.16.tar.gz",
@@ -940,8 +933,8 @@
         {
           "type": "git",
           "url": "https://github.com/CollaboraOnline/online.git",
-          "tag": "coda-25.04.8.1-1",
-          "commit": "57401feb64ce0a651f309d6838c70b804849f6c0"
+          "tag": "coda-25.04.9.2-2",
+          "commit": "76dd790f3a0cb209aa3ce684736cf6fbf73dd46b"
         },
         {
           "type": "archive",
