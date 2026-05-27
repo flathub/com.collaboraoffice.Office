@@ -637,7 +637,7 @@
           "url": "https://dev-www.libreoffice.org/src/zxcvbn-c-2.6.tar.gz",
           "sha256": "11e39f6776f9c82c68b2acb94336e32697d4ab6cdb4ac16f9583ccbdd735113a",
           "type": "file",
-                    "dest": "external/tarballs",
+          "dest": "external/tarballs",
           "dest-filename": "zxcvbn-c-2.6.tar.gz"
         },
         {
