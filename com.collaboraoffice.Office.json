@@ -37,6 +37,102 @@
   },
   "modules": [
     {
+      "name": "poco",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
+        "-DBUILD_SHARED_LIBS=OFF",
+        "-DENABLE_TESTS=OFF",
+        "-DENABLE_ACTIVERECORD=OFF",
+        "-DENABLE_ACTIVERECORD_COMPILER=OFF",
+        "-DENABLE_APACHECONNECTOR=OFF",
+        "-DENABLE_DATA=OFF",
+        "-DENABLE_DATA_MYSQL=OFF",
+        "-DENABLE_DATA_ODBC=OFF",
+        "-DENABLE_DATA_POSTGRESQL=OFF",
+        "-DENABLE_DATA_SQLITE=OFF",
+        "-DENABLE_ENCODINGS=OFF",
+        "-DENABLE_JWT=OFF",
+        "-DENABLE_MONGODB=OFF",
+        "-DENABLE_PAGECOMPILER=OFF",
+        "-DENABLE_PAGECOMPILER_FILE2PAGE=OFF",
+        "-DENABLE_PROMETHEUS=OFF",
+        "-DENABLE_REDIS=OFF",
+        "-DPOCO_UNBUNDLED=ON"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/pocoproject/poco.git",
+          "tag": "poco-1.12.5-release",
+          "commit": "c04dfdbc37882f298d3178b3875cd67c38ea7d78"
+        }
+      ],
+      "cleanup": [ "*" ]
+    },
+    {
+      "name": "python3-lxml",
+      "buildsystem": "simple",
+      "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"lxml==5.2.2\" --no-build-isolation"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/63/f7/ffbb6d2eb67b80a45b8a0834baa5557a14a5ffce0979439e7cd7f0c4055b/lxml-5.2.2.tar.gz",
+          "sha256": "bb2dc4898180bea79863d5487e5f9c7c34297414bad54bcd0f0852aee9cfdb87"
+        }
+      ],
+      "cleanup": [ "*" ]
+    },
+    {
+      "name": "python3-polib",
+      "buildsystem": "simple",
+      "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"polib>=1.2,<1.3\" --no-build-isolation"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/6b/99/45bb1f9926efe370c6dbe324741c749658e44cb060124f28dad201202274/polib-1.2.0-py2.py3-none-any.whl",
+          "sha256": "1c77ee1b81feb31df9bca258cbc58db1bbb32d10214b173882452c73af06d62d"
+        }
+      ],
+      "cleanup": [ "*" ]
+    },
+    {
+      "name": "cppunit",
+      "buildsystem": "autotools",
+      "config-opts": [
+        "--disable-static",
+        "--enable-shared",
+        "--disable-doxygen"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://git.libreoffice.org/cppunit",
+          "tag": "cppunit-1.15.1",
+          "commit": "7e1c90fa717eb2253ca1901d4065f06b2469cfa2"
+        }
+      ],
+      "cleanup": [ "*" ]
+    },
+    {
+      "name": "rsync",
+      "buildsystem": "autotools",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.samba.org/pub/rsync/src/rsync-3.4.1.tar.gz",
+          "sha256": "2924bcb3a1ed8b551fc101f740b9f0fe0a202b115027647cf69850d65fd88c52"
+        }
+      ],
+      "cleanup": [ "*" ]
+    },
+    {
       "name": "libreoffice",
       "sources": [
         {
@@ -191,13 +287,6 @@
           "type": "file",
           "dest": "external/tarballs",
           "dest-filename": "CoinMP-1.8.4.tgz"
-        },
-        {
-          "url": "https://dev-www.libreoffice.org/src/cppunit-1.15.1.tar.gz",
-          "sha256": "89c5c6665337f56fd2db36bc3805a5619709d51fb136e51937072f63fcc717a7",
-          "type": "file",
-          "dest": "external/tarballs",
-          "dest-filename": "cppunit-1.15.1.tar.gz"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/glm-1.0.1.zip",
@@ -714,6 +803,7 @@
         "--with-lang=ar ca cs cy da de el en-US en-GB es eu fi fr ga gl he hr hu hy id is it ja kk ko nl pl pt pt-BR ro ru sk sl sq sv tr uk zh-CN zh-TW",
         "--with-linker-hash-style=both",
         "--with-system-altlinuxhyph",
+        "--with-system-cppunit",
         "--with-system-curl",
         "--with-system-dicts",
         "--with-system-expat",
@@ -747,7 +837,6 @@
         "--without-system-cairo",
         "--without-system-clucene",
         "--without-system-coinmp",
-        "--without-system-cppunit",
         "--without-system-dragonbox",
         "--without-system-frozen",
         "--without-system-glm",
@@ -800,102 +889,6 @@
         "/share/appdata",
         "/share/applications"
       ]
-    },
-    {
-      "name": "poco",
-      "buildsystem": "cmake-ninja",
-      "builddir": true,
-      "config-opts": [
-        "-DCMAKE_BUILD_TYPE=Release",
-        "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
-        "-DBUILD_SHARED_LIBS=OFF",
-        "-DENABLE_TESTS=OFF",
-        "-DENABLE_ACTIVERECORD=OFF",
-        "-DENABLE_ACTIVERECORD_COMPILER=OFF",
-        "-DENABLE_APACHECONNECTOR=OFF",
-        "-DENABLE_DATA=OFF",
-        "-DENABLE_DATA_MYSQL=OFF",
-        "-DENABLE_DATA_ODBC=OFF",
-        "-DENABLE_DATA_POSTGRESQL=OFF",
-        "-DENABLE_DATA_SQLITE=OFF",
-        "-DENABLE_ENCODINGS=OFF",
-        "-DENABLE_JWT=OFF",
-        "-DENABLE_MONGODB=OFF",
-        "-DENABLE_PAGECOMPILER=OFF",
-        "-DENABLE_PAGECOMPILER_FILE2PAGE=OFF",
-        "-DENABLE_PROMETHEUS=OFF",
-        "-DENABLE_REDIS=OFF",
-        "-DPOCO_UNBUNDLED=ON"
-      ],
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://github.com/pocoproject/poco.git",
-          "tag": "poco-1.12.5-release",
-          "commit": "c04dfdbc37882f298d3178b3875cd67c38ea7d78"
-        }
-      ],
-      "cleanup": [ "*" ]
-    },
-    {
-      "name": "python3-lxml",
-      "buildsystem": "simple",
-      "build-commands": [
-        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"lxml==5.2.2\" --no-build-isolation"
-      ],
-      "sources": [
-        {
-          "type": "file",
-          "url": "https://files.pythonhosted.org/packages/63/f7/ffbb6d2eb67b80a45b8a0834baa5557a14a5ffce0979439e7cd7f0c4055b/lxml-5.2.2.tar.gz",
-          "sha256": "bb2dc4898180bea79863d5487e5f9c7c34297414bad54bcd0f0852aee9cfdb87"
-        }
-      ],
-      "cleanup": [ "*" ]
-    },
-    {
-      "name": "python3-polib",
-      "buildsystem": "simple",
-      "build-commands": [
-        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"polib>=1.2,<1.3\" --no-build-isolation"
-      ],
-      "sources": [
-        {
-          "type": "file",
-          "url": "https://files.pythonhosted.org/packages/6b/99/45bb1f9926efe370c6dbe324741c749658e44cb060124f28dad201202274/polib-1.2.0-py2.py3-none-any.whl",
-          "sha256": "1c77ee1b81feb31df9bca258cbc58db1bbb32d10214b173882452c73af06d62d"
-        }
-      ],
-      "cleanup": [ "*" ]
-    },
-    {
-      "name": "cppunit",
-      "buildsystem": "autotools",
-      "config-opts": [
-        "--disable-static",
-        "--enable-shared",
-        "--disable-doxygen"
-      ],
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://git.libreoffice.org/cppunit",
-          "tag": "cppunit-1.15.1",
-          "commit": "7e1c90fa717eb2253ca1901d4065f06b2469cfa2"
-        }
-      ],
-      "cleanup": [ "*" ]
-    },
-    {
-      "name": "rsync",
-      "buildsystem": "autotools",
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://download.samba.org/pub/rsync/src/rsync-3.4.1.tar.gz",
-          "sha256": "2924bcb3a1ed8b551fc101f740b9f0fe0a202b115027647cf69850d65fd88c52"
-        }
-      ],
-      "cleanup": [ "*" ]
     },
     {
       "name": "collabora-office",
