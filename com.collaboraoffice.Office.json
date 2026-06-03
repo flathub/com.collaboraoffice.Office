@@ -138,14 +138,14 @@
         {
           "type": "git",
           "url": "https://gerrit.collaboraoffice.com/online",
-          "tag": "cp-26.04.1-2",
-          "commit": "7757c9867a9721a3ade7728c73178032f133b691"
+          "tag": "cp-26.04.1-3",
+          "commit": "f0f0f2a66a15a13673f64d5ad61db2369a00cb39"
         },
         {
           "type": "git",
           "url": "https://gerrit.collaboraoffice.com/translations",
-          "tag": "cp-26.04.1-2",
-          "commit": "f486bb93b6c1a8247bbf8472e059262882a3833a",
+          "tag": "cp-26.04.1-3",
+          "commit": "39f631e9adf093e56e06890e1dc4830d6cc4906f",
           "dest": "engine/translations"
         },
         {
@@ -282,11 +282,11 @@
           "dest-filename": "edc4d741888bc0d38e32dbaa17149596-source-sans-pro-2.010R-ro-1.065R-it.tar.gz"
         },
         {
-          "url": "https://dev-www.libreoffice.org/src/boost_1_89_0.tar.xz",
-          "sha256": "b3a976c659961f1d7fae9a8e58d6729a11f5473abaf2ef0e623f53777c86475d",
+          "url": "https://dev-www.libreoffice.org/src/boost_1_91_0.tar.xz",
+          "sha256": "2f975c10da79511c2f218189fc8a12eef1a92e3bd18206e9841d406296d065eb",
           "type": "file",
           "dest": "engine/external/tarballs",
-          "dest-filename": "boost_1_89_0.tar.xz"
+          "dest-filename": "boost_1_91_0.tar.xz"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/48d647fbd8ef8889e5a7f422c1bfda94-clucene-core-2.3.3.4.tar.gz",
@@ -324,11 +324,11 @@
           "dest-filename": "libcdr-0.1.9.tar.xz"
         },
         {
-          "url": "https://dev-www.libreoffice.org/src/libcmis-0.6.2.tar.xz",
-          "sha256": "1b5c2d7258ff93eb5f9958ff0e4dfd7332dc75a071bb717dde2217a26602a644",
+          "url": "https://dev-www.libreoffice.org/src/libcmis-0.6.3.tar.xz",
+          "sha256": "5adb3781f374adf491103b2cb2dc290085150c9b7d097baf56d8ac35df84e792",
           "type": "file",
           "dest": "engine/external/tarballs",
-          "dest-filename": "libcmis-0.6.2.tar.xz"
+          "dest-filename": "libcmis-0.6.3.tar.xz"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/libe-book-0.1.3.tar.xz",
@@ -766,8 +766,6 @@
         "--disable-dconf",
         "--disable-epm",
         "--disable-evolution2",
-        "--disable-ext-nlpsolver",
-        "--disable-ext-wiki-publisher",
         "--disable-gio",
         "--disable-gstreamer-1-0",
         "--disable-gtk3",
@@ -777,11 +775,9 @@
         "--disable-lpsolve",
         "--disable-noto-font",
         "--disable-online-update",
-        "--disable-poppler",
         "--disable-qt5",
         "--disable-randr",
         "--disable-sal-log",
-        "--disable-scripting-beanshell",
         "--disable-scripting-javascript",
         "--disable-sdremote",
         "--disable-sdremote-bluetooth",
@@ -927,8 +923,8 @@
         {
           "type": "git",
           "url": "https://gerrit.collaboraoffice.com/online",
-          "tag": "cp-26.04.1-2",
-          "commit": "7757c9867a9721a3ade7728c73178032f133b691"
+          "tag": "cp-26.04.1-3",
+          "commit": "f0f0f2a66a15a13673f64d5ad61db2369a00cb39"
         },
         {
           "type": "archive",
