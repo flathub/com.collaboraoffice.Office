@@ -37,42 +37,6 @@
   },
   "modules": [
     {
-      "name": "poco",
-      "buildsystem": "cmake-ninja",
-      "builddir": true,
-      "config-opts": [
-        "-DCMAKE_BUILD_TYPE=Release",
-        "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
-        "-DBUILD_SHARED_LIBS=OFF",
-        "-DENABLE_TESTS=OFF",
-        "-DENABLE_ACTIVERECORD=OFF",
-        "-DENABLE_ACTIVERECORD_COMPILER=OFF",
-        "-DENABLE_APACHECONNECTOR=OFF",
-        "-DENABLE_DATA=OFF",
-        "-DENABLE_DATA_MYSQL=OFF",
-        "-DENABLE_DATA_ODBC=OFF",
-        "-DENABLE_DATA_POSTGRESQL=OFF",
-        "-DENABLE_DATA_SQLITE=OFF",
-        "-DENABLE_ENCODINGS=OFF",
-        "-DENABLE_JWT=OFF",
-        "-DENABLE_MONGODB=OFF",
-        "-DENABLE_PAGECOMPILER=OFF",
-        "-DENABLE_PAGECOMPILER_FILE2PAGE=OFF",
-        "-DENABLE_PROMETHEUS=OFF",
-        "-DENABLE_REDIS=OFF",
-        "-DPOCO_UNBUNDLED=ON"
-      ],
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://github.com/pocoproject/poco.git",
-          "tag": "poco-1.12.5-release",
-          "commit": "c04dfdbc37882f298d3178b3875cd67c38ea7d78"
-        }
-      ],
-      "cleanup": [ "*" ]
-    },
-    {
       "name": "python3-lxml",
       "buildsystem": "simple",
       "build-commands": [
@@ -133,19 +97,44 @@
       "cleanup": [ "*" ]
     },
     {
-      "name": "libreoffice",
+      "name": "collabora-office",
+      "buildsystem": "simple",
+      "build-options": {
+        "arch": {
+          "x86_64": {
+            "prepend-pkg-config-path": "/app/lib/x86_64-linux-gnu/pkgconfig"
+          },
+          "aarch64": {
+            "prepend-pkg-config-path": "/app/lib/aarch64-linux-gnu/pkgconfig"
+          }
+        }
+      },
+      "build-commands": [
+        "cd engine && ./autogen.sh --with-distro=CPLinuxQtFlatpak --prefix=$(pwd)/inst && make && make distro-pack-install && make cmd cmd='$(SRCDIR)/solenv/bin/assemble-flatpak.sh com.collaboraoffice.Office'",
+        "autoreconf -vfi",
+        "./configure --prefix=/app --enable-qtapp --enable-ld --with-lo-builddir=$(pwd)/engine --with-lokit-path=$(pwd)/engine/include --with-lo-path=/app/collaboraoffice --with-vendor=\"Collabora Productivity Limited\" --with-app-name=\"Collabora Office\" --with-info-url=https://collaboraoffice.com/",
+        "make",
+        "rm -rf /app/share/applications /app/share/icons /app/share/appdata /app/bin/collaboraoffice",
+        "make install"
+      ],
+      "ensure-writable": [
+        "/collaboraoffice/LICENSE.html"
+      ],
+      "post-install": [
+        "python3 scripts/insert-coda-license.py /app/collaboraoffice/LICENSE.html CODA-THIRDPARTYLICENSES.html"
+      ],
       "sources": [
         {
           "type": "git",
           "url": "https://gerrit.collaboraoffice.com/online",
-          "tag": "coda-26.04.1.4-1",
-          "commit": "b2996e09e5f1bd204ced035a22cdd02b7001cf3e"
+          "tag": "coda-26.04.2.4-2",
+          "commit": "9e9db9c7fe45aa99b0a87101238a49ab99789e2d"
         },
         {
           "type": "git",
           "url": "https://gerrit.collaboraoffice.com/translations",
-          "tag": "cp-26.04.1-3",
-          "commit": "39f631e9adf093e56e06890e1dc4830d6cc4906f",
+          "tag": "cp-26.04.2-3",
+          "commit": "a0b00e9e5e0f50965d0ecda4a558300a7e4a453a",
           "dest": "engine/translations"
         },
         {
@@ -191,25 +180,32 @@
           "dest-filename": "Open_Sans.zip"
         },
         {
-          "url": "https://dev-www.libreoffice.org/src/quickjs-v0.13.0.tar.gz",
-          "sha256": "13ed1d22cd4b2b693a94a234e752d1ea6a0064434a740031ff90439679257c6c",
+          "url": "https://dev-www.libreoffice.org/src/quickjs-v0.14.0.tar.gz",
+          "sha256": "928e9406addd99eb8623348f2cfcd916eade9a263c60d42be79bc7aee4ee8453",
           "type": "file",
           "dest": "engine/external/tarballs",
-          "dest-filename": "quickjs-v0.13.0.tar.gz"
+          "dest-filename": "quickjs-v0.14.0.tar.gz"
         },
         {
-          "url": "https://dev-www.libreoffice.org/src/pdfium-7795.tar.bz2",
-          "sha256": "fbb7b551699a4bbf2f47986d485df0a82e9391841239cdbcd64554d88209014c",
+          "url": "https://dev-www.libreoffice.org/src/pdfium-7897.tar.bz2",
+          "sha256": "7d11b3f6e456fbdde392ec9ae1ae5588c85149116edcd1d6a986af0a977bda1f",
           "type": "file",
           "dest": "engine/external/tarballs",
-          "dest-filename": "pdfium-7795.tar.bz2"
+          "dest-filename": "pdfium-7897.tar.bz2"
         },
         {
-          "url": "https://dev-www.libreoffice.org/src/afdko-4.0.3.tar.gz",
-          "sha256": "5feed7c2468e25b25fce0479c04af07f4ed2680bc9251bb4c4aef9ec2fba5720",
+          "url": "https://pocoproject.org/releases/poco-1.15.3/poco-1.15.3-all.tar.bz2",
+          "sha256": "562a1ba1a6db4665f81091c35e997b73f87e1b45e2ab2854cd720d2349518abc",
           "type": "file",
           "dest": "engine/external/tarballs",
-          "dest-filename": "afdko-4.0.3.tar.gz"
+          "dest-filename": "poco-1.15.3-all.tar.bz2"
+        },
+        {
+          "url": "https://dev-www.libreoffice.org/src/afdko-5.0.1.tar.gz",
+          "sha256": "083b504a1cd865e8bfbb42134a34318ce42ef5130daebfc5b0e2f2fb444326c5",
+          "type": "file",
+          "dest": "engine/external/tarballs",
+          "dest-filename": "afdko-5.0.1.tar.gz"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/antlr4-cpp-runtime-4.13.2-source.zip",
@@ -219,11 +215,11 @@
           "dest-filename": "antlr4-cpp-runtime-4.13.2-source.zip"
         },
         {
-          "url": "https://dev-www.libreoffice.org/src/xmlsec1-1.3.11.tar.gz",
-          "sha256": "53675e98fa83b48201d24f7bfbcaeaa1b51496b8b19ff969785856bdeb196af3",
+          "url": "https://dev-www.libreoffice.org/src/xmlsec1-1.3.12.tar.gz",
+          "sha256": "24045199af12d93fe5fdbbbf7e386e823e4842071e9432e2b90ac108b889a923",
           "type": "file",
           "dest": "engine/external/tarballs",
-          "dest-filename": "xmlsec1-1.3.11.tar.gz"
+          "dest-filename": "xmlsec1-1.3.12.tar.gz"
         },
         {
           "url": "https://dev-www.libreoffice.org/src/368f114c078f94214a308a74c7e991bc-crosextrafonts-20130214.tar.gz",
@@ -757,181 +753,6 @@
           "dest": "engine/external/tarballs",
           "dest-filename": "opendyslexic-0.910.12-rc2-2019.10.17.zip"
         }
-      ],
-      "subdir": "engine",
-      "buildsystem": "autotools",
-      "config-opts": [
-        "--prefix=/run/build/libreoffice/inst",
-        "--disable-dbus",
-        "--disable-dconf",
-        "--disable-epm",
-        "--disable-evolution2",
-        "--disable-gio",
-        "--disable-gstreamer-1-0",
-        "--disable-gtk3",
-        "--disable-gui",
-        "--disable-kf5",
-        "--disable-ldap",
-        "--disable-lpsolve",
-        "--disable-noto-font",
-        "--disable-online-update",
-        "--disable-qt5",
-        "--disable-randr",
-        "--disable-sal-log",
-        "--disable-scripting-javascript",
-        "--disable-sdremote",
-        "--disable-sdremote-bluetooth",
-        "--enable-cairo-rgba",
-        "--enable-extension-integration",
-        "--enable-hardening-flags",
-        "--enable-mergelibs",
-        "--enable-mpl-subset",
-        "--enable-release-build",
-        "--enable-symbols",
-        "--with-branding=icon-themes/galaxy/brand_cp",
-        "--with-docrepair-fonts",
-        "--with-fonts",
-        "--with-galleries=no",
-        "--with-lang=ar bg ca cs cy da de el en-US en-GB eo es eu fi fr ga gl he hr hu hy id is it ja kk ko lo nb nl oc pl pt pt-BR ro ru sk sl sq sv tr uk vi zh-CN zh-TW",
-        "--with-linker-hash-style=both",
-        "--with-system-altlinuxhyph",
-        "--with-system-cppunit",
-        "--with-system-curl",
-        "--with-system-dicts",
-        "--with-system-expat",
-        "--with-system-fontconfig",
-        "--with-system-freetype",
-        "--with-system-graphite",
-        "--with-system-harfbuzz",
-        "--with-system-hunspell",
-        "--with-system-icu",
-        "--with-system-lcms2",
-        "--with-system-libpng",
-        "--with-system-libtiff",
-        "--with-system-libwebp",
-        "--with-system-libxml",
-        "--with-system-mythes",
-        "--with-system-nss",
-        "--with-system-openssl",
-        "--with-system-zlib",
-        "--with-system-zstd",
-        "--with-theme=colibre colibre_svg",
-        "--with-vendor=Collabora Productivity Limited",
-        "--without-buildconfig-recorded",
-        "--without-export-validation",
-        "--without-help",
-        "--without-java",
-        "--without-junit",
-        "--without-lxml",
-        "--without-myspell-dicts",
-        "--without-system-abseil",
-        "--without-system-argon2",
-        "--without-system-boost",
-        "--without-system-box2d",
-        "--without-system-cairo",
-        "--without-system-clucene",
-        "--without-system-coinmp",
-        "--without-system-dragonbox",
-        "--without-system-frozen",
-        "--without-system-glm",
-        "--without-system-jpeg",
-        "--without-system-libabw",
-        "--without-system-libcdr",
-        "--without-system-libcmis",
-        "--without-system-libebook",
-        "--without-system-libeot",
-        "--without-system-libepubgen",
-        "--without-system-libetonyek",
-        "--without-system-libexttextcat",
-        "--without-system-libfixmath",
-        "--without-system-libfreehand",
-        "--without-system-liblangtag",
-        "--without-system-libmspub",
-        "--without-system-libmwaw",
-        "--without-system-libnumbertext",
-        "--without-system-libodfgen",
-        "--without-system-libpagemaker",
-        "--without-system-libqxp",
-        "--without-system-librevenge",
-        "--without-system-libstaroffice",
-        "--without-system-libvisio",
-        "--without-system-libwpd",
-        "--without-system-libwpg",
-        "--without-system-libwps",
-        "--without-system-libzmf",
-        "--without-system-mdds",
-        "--without-system-odbc",
-        "--without-system-orcus",
-        "--without-system-redland",
-        "--without-system-sane",
-        "--without-system-xmlsec",
-        "--without-system-zxcvbn",
-        "--without-system-zxing",
-        "--without-templates"
-      ],
-      "install-rule": "distro-pack-install",
-      "post-install": [
-        "make cmd cmd='$(SRCDIR)/solenv/bin/assemble-flatpak.sh org.libreoffice.LibreOffice'",
-        "mkdir -p /app/core/include",
-        "cp -r include/COKit /app/core/include/."
-      ],
-      "cleanup": [
-        "/core",
-        "/bin/collaboraoffice",
-        "/share/icons",
-        "/share/appdata",
-        "/share/applications"
-      ]
-    },
-    {
-      "name": "collabora-office",
-      "buildsystem": "autotools",
-      "build-options": {
-        "arch": {
-          "x86_64": {
-            "prepend-pkg-config-path": "/app/lib/x86_64-linux-gnu/pkgconfig"
-          },
-          "aarch64": {
-            "prepend-pkg-config-path": "/app/lib/aarch64-linux-gnu/pkgconfig"
-          }
-        },
-        "env": {
-          "XDG_CACHE_HOME": "/run/build/collabora-online/flatpak-node/cache",
-          "npm_config_offline": "true",
-          "npm_config_cache": "/run/build/collabora-online/flatpak-node/npm-cache"
-        }
-      },
-      "config-opts": [
-        "--enable-qtapp",
-        "--enable-silent-rules",
-        "--disable-ssl",
-        "--with-poco-includes=/app/include",
-        "--with-poco-libs=/app/lib",
-        "--with-lokit-path=/app/core/include",
-        "--with-lo-path=/app/collaboraoffice",
-        "--with-vendor=Collabora Productivity Limited",
-        "--with-app-name=Collabora Office",
-        "--with-info-url=https://collaboraoffice.com/"
-      ],
-      "ensure-writable": [
-        "/collaboraoffice/LICENSE.html"
-      ],
-      "post-install": [
-        "python3 scripts/insert-coda-license.py /app/collaboraoffice/LICENSE.html CODA-THIRDPARTYLICENSES.html"
-      ],
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://gerrit.collaboraoffice.com/online",
-          "tag": "coda-26.04.1.4-1",
-          "commit": "b2996e09e5f1bd204ced035a22cdd02b7001cf3e"
-        },
-        {
-          "type": "archive",
-          "url": "https://github.com/CollaboraOnline/online/releases/download/for-code-assets/node_modules-26.04.1-1.tar.xz",
-          "sha256": "6262d4fb4361f442e5dacaab84f86bdec74e33fe3ecd0daa74ff6a6ac6d0ca4b",
-          "dest": "browser/node_modules"
-        }
       ]
     },
     {
@@ -944,8 +765,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.collaboraoffice.com/downloads/collabora-office-brand/collabora-office-brand-26.04.2.1.tar.gz",
-          "sha256": "321112b8f29d338ca9530dc604448c9eb465c4f9308468722f16a95fc6f830a8"
+          "url": "https://www.collaboraoffice.com/downloads/collabora-office-brand/collabora-office-brand-26.04.2.3.tar.gz",
+          "sha256": "2d0c9b407019d4744a57a2771ec42bf97685f082601e075237a04ee6c6b7e8e3"
         }
       ]
     }
